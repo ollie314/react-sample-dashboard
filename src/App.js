@@ -17,7 +17,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import CssBaseline from '@mui/material/CssBaseline';
 
 import { mainListItems } from './listItems';
 import Copyright from './components/Copyright';

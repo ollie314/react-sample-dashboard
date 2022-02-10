@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 
 import ClientCard from '../ClientCard';
+import ExchangePdfViewer from './ExchangePdfViewer';
 
 const ContentVerification = ({ client }) => {
   /*
@@ -23,6 +24,7 @@ const ContentVerification = ({ client }) => {
       <Typography variant="h6" gutterBottom component="div">
         Review content you are about to send
       </Typography>
+      <ExchangePdfViewer />
     </Stack>
   );
 };
