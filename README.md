@@ -1,3 +1,4 @@
-# react-react-sample-dashboard
+# Sample react dashboard based on mui
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/react-cpfyqf)
+> TBC
+
