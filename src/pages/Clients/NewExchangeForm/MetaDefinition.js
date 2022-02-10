@@ -8,6 +8,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
+import TextField from '@mui/material/TextField';
 
 import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
 import * as yup from 'yup';
@@ -51,20 +53,47 @@ const validationSchema = yup.object().shape({
   ),
 });
 
+const ucFirst = (s) => `${s.toUpperCase().charAt(0)}${s.slice(1)}`
+
+const MetaItem = ({kind, content, index, name, editable}) => {
+  return (
+    <>
+      {editable &&
+        <Field
+          fullWidth
+          component={TextField}
+          name={`${name}.${index}.${kind}`}
+          type="text"
+          value={content}
+          label={ucFirst(kind)}
+        />
+      }
+      {!editable &&
+        <Item>{content}</Item>
+      }
+    </>
+  );
+};
+
 const MetaEntry = ({
+  index = 0,
   metaKey = '',
   metaValue = '',
-  setMetaKey = () => {},
-  setMetaValue = () => {},
+  name = '',
   editable = false,
 }) => {
   return (
     <>
-      <Grid item xs={6} md={6}>
-        <Item>{metaKey}</Item>
+      <Grid item xs={5} md={5}>
+        <MetaItem kind="key" content={metaKey} index={index} name={name} editable={editable} />
       </Grid>
       <Grid item xs={6} md={6}>
-        <Item>{metaValue}</Item>
+        <MetaItem kind="value" content={metaValue} index={index} name={name} editable={editable} />
+      </Grid>
+      <Grid item xs={1} md={1}>
+        <IconButton aria-label="delete">
+          <DeleteIcon />
+        </IconButton>
       </Grid>
     </>
   );
@@ -72,29 +101,42 @@ const MetaEntry = ({
 
 const MetaDefinition = ({ metas = [], editable = true }) => {
   const initialValues = [...metas];
+  const onAddMeta = (values, setValues) => {
+    const items = [...values];
+    items.push({key: '', value: ''});
+    setValues(items);
+  }
   return (
     <>
       <Typography variant="h6" gutterBottom component="div">
         Fill Meta information.
       </Typography>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Header />
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-          >
-            {initialValues.map((m) => (
-              <MetaEntry key={m.key} metaKey={m.key} metaValue={m.value} />
-            ))}
-          </Formik>
-        </Grid>
-      </Box>
-      {editable && (
-        <IconButton aria-label="delete">
-          <AddIcon />
-        </IconButton>
-      )}
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+      >
+        {({errors, values, touched, setValues}) => (
+          <Form>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={2}>
+              <Header />
+                <FieldArray name="items">
+                  {() => (
+                    values.map((m, i) => (
+                      <MetaEntry key={`${m.key}-${i}`} index={i} metaKey={m.key} metaValue={m.value} name="items" editable={editable} />
+                    ))
+                  )}
+                </FieldArray>
+            </Grid>
+          </Box>
+          {editable && (
+            <IconButton aria-label="delete">
+              <AddIcon onClick={() => onAddMeta(values, setValues)} />
+            </IconButton>
+          )}
+          </Form>
+          )}
+        </Formik>
     </>
   );
 };

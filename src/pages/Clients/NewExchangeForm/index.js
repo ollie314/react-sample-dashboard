@@ -95,7 +95,7 @@ const NewExchangeForm = () => {
                 onClick={handleNext}
                 sx={{ mt: 3, ml: 1 }}
               >
-                {activeStep === steps.length - 1 ? 'Send' : 'Next'}
+                {activeStep === steps.length - 2 ? 'Send' : 'Next'}
               </Button>
             </Box>
           </React.Fragment>
