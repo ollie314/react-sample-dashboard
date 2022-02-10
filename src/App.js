@@ -21,6 +21,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { mainListItems } from './listItems';
 import Copyright from './components/Copyright';
 
+import './style.css';
+
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {

@@ -8,21 +8,22 @@ import Paper from '@mui/material/Paper';
 
 import Title from '../../components/Title';
 
+import IntegrationDiagram from './IntegrationDiagram';
+
 const Integrations = () => {
   return (
     <>
       <Grid container spacing={3}>
-        {/* Chart */}
         <Grid item xs={12} md={12} lg={12}>
           <Paper
             sx={{
               p: 2,
               display: 'flex',
               flexDirection: 'column',
-              height: 240,
             }}
           >
             <Title>Integrations</Title>
+            <IntegrationDiagram />
           </Paper>
         </Grid>
       </Grid>
