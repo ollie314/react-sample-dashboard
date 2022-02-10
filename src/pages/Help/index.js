@@ -1,8 +1,6 @@
 import React from 'react';
 
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
+import Alert from '@mui/material/Alert';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
@@ -19,10 +17,10 @@ const Help = () => {
               p: 2,
               display: 'flex',
               flexDirection: 'column',
-              height: 240,
             }}
           >
             <Title>Help</Title>
+            <Alert severity="info">We will work on the help soon!</Alert>
           </Paper>
         </Grid>
       </Grid>
